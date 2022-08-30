@@ -1,7 +1,8 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, signInWithRedirect, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, signInWithRedirect, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
+// Firebase Config from the site
 const firebaseConfig = {
     apiKey: "AIzaSyDLVSvIQfPiT8YLgqqHiBMkQnQ_q8ePXXQ",
     authDomain: "e-clothing-db-5aa75.firebaseapp.com",
@@ -11,19 +12,24 @@ const firebaseConfig = {
     appId: "1:51544833816:web:e982fc02165c83cc55286d",
 };
 
+// initialize
 const firebaseApp = initializeApp(firebaseConfig);
 
-const provider = new GoogleAuthProvider();
+const googleProvider = new GoogleAuthProvider();
+const facebookProvider = new FacebookAuthProvider();
 
-provider.setCustomParameters({
+googleProvider.setCustomParameters({
     prompt: "select_account",
 });
 
-export const auth = getAuth();
+export const auth = getAuth(firebaseApp);
 
-export const signInWithGooglePopUp = () => signInWithPopup(auth, provider);
+// Google
+export const signInWithGooglePopUp = () => signInWithPopup(auth, googleProvider);
+export const signInWithGoogleRedirect = () => signInWithRedirect(auth, googleProvider);
+export const signInWithFacebookRedirect = () => signInWithRedirect(auth, facebookProvider);
 
-const db = getFirestore();
+const db = getFirestore(firebaseApp);
 
 export const createUserDocumentFromAuth = async (userAuth) => {
     const userDocRef = doc(db, "users", userAuth.uid);
