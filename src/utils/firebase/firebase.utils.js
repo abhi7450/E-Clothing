@@ -8,6 +8,7 @@ import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     signOut,
+    onAuthStateChanged,
 } from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
@@ -41,6 +42,7 @@ export const signInWithFacebookRedirect = () => signInWithRedirect(auth, faceboo
 // Connecting the Firestore
 const db = getFirestore(firebaseApp);
 
+//
 export const createUserDocumentFromAuth = async (userAuth, additionalInfo = {}) => {
     if (!userAuth) return;
 
@@ -82,3 +84,5 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
 };
 
 export const signOutUser = async () => signOut(auth);
+
+export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback);
