@@ -3,11 +3,11 @@ import React from "react";
 import "./button.styles.scss";
 
 /**
- *  default btn
+ *  default btn (black -> white)
  *
- * inverted btn
+ * inverted btn (white -> black)
  *
- * google signin btn
+ * google signin btn (blue)
  */
 const BUTTON_TYPE_CLASSES = {
     google: "google-sign-in",
