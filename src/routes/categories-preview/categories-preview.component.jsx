@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { selectCategoryMap } from "../../store/features/categories/categoriesSlice";
 
 const CategoriesPreview = () => {
-  const { categoryMap } = useSelector(selectCategoryMap);
+  const categoryMap = useSelector(selectCategoryMap);
   return (
     <>
       {Object.keys(categoryMap).map((title) => {

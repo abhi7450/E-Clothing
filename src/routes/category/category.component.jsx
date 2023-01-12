@@ -7,9 +7,13 @@ import { selectCategoryMap } from "../../store/features/categories/categoriesSli
 
 const Category = () => {
   const { category } = useParams();
-  const { categoryMap } = useSelector(selectCategoryMap);
+  console.log("Rerender category component");
+
+  const categoryMap = useSelector(selectCategoryMap);
   const [products, setProducts] = useState(categoryMap[category]);
+
   useEffect(() => {
+    console.log("effect fited calling setProducts");
     setProducts(categoryMap[category]);
   }, [category, categoryMap]);
 
