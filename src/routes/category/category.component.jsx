@@ -3,17 +3,15 @@ import { useParams } from "react-router-dom";
 import ProductCard from "../../components/product-card/product-card.component";
 import { CategoryContainer, Title } from "./category.styles.jsx";
 import { useSelector } from "react-redux";
-import { selectCategoryMap } from "../../store/features/categories/categoriesSlice";
+import { selectCategoryMap } from "../../store/features/categories/categories.selector";
 
 const Category = () => {
   const { category } = useParams();
-  console.log("Rerender category component");
 
   const categoryMap = useSelector(selectCategoryMap);
   const [products, setProducts] = useState(categoryMap[category]);
 
   useEffect(() => {
-    console.log("effect fited calling setProducts");
     setProducts(categoryMap[category]);
   }, [category, categoryMap]);
 

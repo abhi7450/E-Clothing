@@ -1,9 +1,13 @@
-import React, { useContext } from "react";
 import CheckoutItem from "../../components/checkout-item/checkout-item.component";
-import { CartContext } from "../../contexts/cart.context";
 import { CheckoutContainer, CheckoutHeader, HeaderBlock, Total } from "./checkout.styles.jsx";
+import { useSelector } from "react-redux";
+import { selectCartTotal, selectCartItems } from "../../store/features/cart/cart.selector";
+import PaymentForm from "../../components/payment-form/payment-form.component";
+
 const Checkout = () => {
-  const { cartItems, cartTotal } = useContext(CartContext);
+  const cartTotal = useSelector(selectCartTotal);
+  const cartItems = useSelector(selectCartItems);
+
   return (
     <CheckoutContainer>
       <CheckoutHeader>
@@ -28,6 +32,7 @@ const Checkout = () => {
         <CheckoutItem key={cartItem.id} cartItem={cartItem} />
       ))}
       <Total>Total: {cartTotal}</Total>
+      <PaymentForm />
     </CheckoutContainer>
   );
 };
