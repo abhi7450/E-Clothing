@@ -19,7 +19,7 @@ const Navigation = () => {
     <>
       <NavigationContainer>
         <LogoContainer to="/">
-          <CrownLogo className="logo" />
+          <CrownLogo className="logo" aria-details="Crown Shoping" />
         </LogoContainer>
         <NavLinkContainer>
           <NavLink to="/shop">SHOP</NavLink>

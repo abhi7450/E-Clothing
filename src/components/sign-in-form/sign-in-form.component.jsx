@@ -6,7 +6,8 @@ import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
 
 import { signInWithGooglePopUp, signInAuthUserWithEmailAndPassword } from "../../utils/firebase/firebase.utils";
 import { ButtonContainer, SignInContainer } from "./sign-in-form.styles.jsx";
-
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../store/features/user/userSlice";
 const defaultFormFeilds = {
   email: "",
   password: "",
@@ -17,9 +18,10 @@ const SignInForm = () => {
   const resetformFields = () => {
     setFormFields(defaultFormFeilds);
   };
-
+  const currentUser = useSelector(selectCurrentUser);
   const signInWithGoogle = async () => {
     await signInWithGooglePopUp();
+    console.log(currentUser);
   };
 
   const handleSubmit = async (event) => {
@@ -55,7 +57,6 @@ const SignInForm = () => {
 
       <form onSubmit={handleSubmit}>
         <FormInput label="Email" type="email" required onChange={handleChange} name="email" value={email} />
-
         <FormInput label="Password" type="password" required onChange={handleChange} name="password" value={password} />
         <ButtonContainer>
           <Button type="submit">Sign In</Button>
